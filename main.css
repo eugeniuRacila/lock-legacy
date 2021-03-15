@@ -1,0 +1,48 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    align-items: center;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Roboto Mono', monospace;
+}
+
+main {
+    margin: 0 auto;
+    max-width: 800px;
+    text-align: center;
+    width: 100%;
+}
+
+.password-controls {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 64px;
+}
+
+.password__row {
+    color: #000;
+    font-size: 22px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    letter-spacing: 16px;
+    line-height: 2.2;
+}
+
+#generate-password {
+    background-color: #FFFFFF;
+    border: none;
+    color: #000000;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    margin-top: 64px;
+    padding: 16px 18px;
+}

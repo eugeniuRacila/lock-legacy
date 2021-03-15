@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main>
+      <div class="password-controls">
+        <label>
+          <input checked id="useUpper" name="upper" type="checkbox">
+          Use upper
+        </label>
+        <label>
+          <input id="useLower"  name="lower" type="checkbox">
+          Use lower
+        </label>
+        <label>
+          <input id="useNumber" name="number" type="checkbox"  >
+          Use number
+        </label>
+        <label>
+          <input id="useSpecial" name="special" type="checkbox">
+          Use special
+        </label>
+      </div>
+      
+      <p id="password" class="password">
+        <div class="password__row">
+          <span id="c-0"></span>
+          <span id="c-1"></span>
+          <span id="c-2"></span>
+          <span id="c-3"></span>
+          <span id="c-4"></span>
+          <span id="c-5"></span>
+          <span id="c-6"></span>
+          <span id="c-7"></span>
+        </div>
+        <div class="password__row">
+          <span id="c-8"></span>
+          <span id="c-9"></span>
+          <span id="c-10"></span>
+          <span id="c-11"></span>
+          <span id="c-12"></span>
+          <span id="c-13"></span>
+          <span id="c-14"></span>
+          <span id="c-15"></span>
+        </div>
+      </p>
+    </main>
+    <button id="generate-password">Generate password</button>
+    <script type="module" src="index.js"></script>
+  </body>
+</html>
