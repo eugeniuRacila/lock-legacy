@@ -22,14 +22,15 @@ export const stopLetterSwap = () => {
   swapLetterTimeoutRef.map((timeout) => clearTimeout(timeout));
 };
 
-const swapLetter = (i) => {
-  console.log("swapLetterTimeoutRef.length", swapLetterTimeoutRef.length);
-  swapLetterTimeoutRef[i] = setTimeout(() => {
-    const tempGeneratedASCIIChar = generateASCIICharFromArray(
-      asciiCharactersPool
-    );
+const updateLetterContent = (i) => {
+  document.getElementById(`c-${i}`).textContent = generateASCIICharFromArray(
+    asciiCharactersPool
+  );
+};
 
-    document.getElementById(`c-${i}`).textContent = tempGeneratedASCIIChar;
+const swapLetter = (i) => {
+  swapLetterTimeoutRef[i] = setTimeout(() => {
+    updateLetterContent(i);
 
     swapLetter(i);
   }, generateLetterSwapTime());
