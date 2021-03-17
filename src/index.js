@@ -2,7 +2,7 @@ import {
   generatePassword,
   stopLetterSwap,
   updateASCIICharactersPool,
-} from "./core/core.js";
+} from "./core/index.js";
 
 (() => {
   const useLower = document.getElementById("useLower");
