@@ -1,3 +1,5 @@
+@import 'colors.css';
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,7 +8,7 @@
 
 body {
     align-items: center;
-    background-color: rgb(142, 233, 39);
+    background-color: var(--wood-smoke);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,32 +19,172 @@ body {
 main {
     margin: 0 auto;
     max-width: 800px;
+    padding: 0 20px;
     text-align: center;
     width: 100%;
 }
 
+.intro__logo {
+    margin-bottom: 32px;
+}
+
+.intro__header {
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 48px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.intro__call {
+    color: #7f8990;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 48px;
+    padding: 0 10%;
+    text-align: center;
+}
+
 .password-controls {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     margin-bottom: 64px;
+}
+
+.password {
+    display: inline-grid;
+    gap: 12px;
+    grid-template-columns: repeat(8, 56px);
+    grid-template-rows: repeat(2, 72px);
+    justify-items: center;
 }
 
 .password__row {
     color: #000;
     font-size: 22px;
-    font-variant-numeric: tabular-nums;
     font-weight: 600;
-    letter-spacing: 16px;
-    line-height: 2.2;
+}
+
+.password__char {
+    align-items: center;
+    background-color: var(--shark); /* #252729 */
+    border-radius: 8px;
+    color: #32373B; /* 565759 */
+    display: flex;
+    height: 100%;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 36px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+
+.password__char.password__char--g {
+    background-color: #353A3F;
+    color: #586169;
+}
+
+.switcher {
+    background-color: rgba(118, 118, 118, 0.1);
+    border: 2px solid var(--outer-space);
+    border-radius: 18px;
+    cursor: pointer;
+    height: 36px;
+    padding: 0 16px 0 40px;
+    position: relative; /* test */
+}
+
+.switcher:not(:last-child) {
+    margin-right: 16px;
+}
+
+.switcher--checked {
+    background-color: rgba(44, 201, 182, 0.1);
+    border-color: var(--turquoise);
+}
+
+.switcher__checkbox {
+    opacity: 0;
+    position: absolute;
+}
+
+.switcher__checkbox:checked ~ .switcher__label {
+    color: var(--turquoise);
+    transform: translate(-23px);
+}
+
+.switcher__checkbox:checked ~ .switcher__tick--unchecked {
+    opacity: 0;
+    transform: translate(20px, -50%);
+}
+
+.switcher__checkbox:checked ~ .switcher__tick--checked {
+    opacity: 1;
+    transform: translate(0, -50%);
+}
+
+.switcher__label {
+    color: var(--shuttle-gray);
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 36px;
+    position: relative;
+    top: -2px;
+    transition: transform 250ms ease;
+    user-select: none;
+}
+
+.switcher__tick {
+    font-size: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: opacity 250ms ease, transform 350ms ease;
+}
+
+.switcher__tick--unchecked {
+    left: 8px;
+}
+
+.switcher__tick--checked {
+    opacity: 0;
+    right: 8px;
+    transform: translate(-20px, -50%);
 }
 
 #generate-password {
-    background-color: #FFFFFF;
-    border: none;
-    color: #000000;
+    background-color: transparent;
+    border: 2px solid var(--turquoise);
+    border-radius: 8px;
+    color: var(--turquoise);
     cursor: pointer;
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
     margin-top: 64px;
-    padding: 16px 18px;
+    padding: 16px 24px;
+    position: relative;
+}
+
+#generate-password::before {
+    background-color: rgba(44, 201, 182, 0.17);
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: opacity 250ms ease;
+    user-select: none;
+}
+
+#generate-password:focus::before,
+#generate-password:hover::before {
+    opacity: 1;
 }

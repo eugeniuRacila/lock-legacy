@@ -4,56 +4,228 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Lock - Generate a Secure Password</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-32x32.png" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
     <main>
+      <div class="intro">
+        <div class="intro__logo">
+          <svg
+            width="46"
+            height="56"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M37 20v-3c0-7.732-6.268-14-14-14S9 9.268 9 17v3H8c-.69 0-1.36.087-2 .252V17C6 7.611 13.611 0 23 0s17 7.611 17 17v3.252A8.016 8.016 0 0038 20h-1z"
+              fill="#C4C4C4"
+            />
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M8 20a8 8 0 00-8 8v20a8 8 0 008 8h30a8 8 0 008-8V28a8 8 0 00-8-8H8zm1 3a6 6 0 00-6 6v18a6 6 0 006 6h28a6 6 0 006-6V29a6 6 0 00-6-6H9z"
+              fill="#C4C4C4"
+            />
+            <rect x="6" y="26" width="34" height="24" rx="4" fill="#4D4D4D" />
+          </svg>
+        </div>
+        <h1 class="intro__header">Secure in every way</h1>
+        <p class="intro__call">
+          Use a strong and random generated passsword and keep all your accounts
+          safe from intruders.
+        </p>
+      </div>
       <div class="password-controls">
-        <label>
-          <input checked id="useUpper" name="upper" type="checkbox">
-          Use upper
+        <label class="switcher">
+          <input
+            class="switcher__checkbox"
+            id="useLower"
+            name="lower"
+            type="checkbox"
+          />
+          <span class="switcher__tick switcher__tick--unchecked">
+            <svg
+              width="19"
+              height="19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M9.5 19a9.5 9.5 0 100-19 9.5 9.5 0 000 19zm4.812-11.256a1 1 0 10-1.414-1.414l-4.454 4.453-1.638-1.638a1 1 0 10-1.414 1.414l2.345 2.346a1 1 0 001.415 0l5.16-5.16z"
+                fill="#586066"
+              />
+            </svg>
+          </span>
+          <span class="switcher__tick switcher__tick--checked">
+            <svg
+              width="19"
+              height="19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M9.5 19a9.5 9.5 0 100-19 9.5 9.5 0 000 19zM6.865 5.45A1 1 0 005.45 6.865L8.086 9.5 5.45 12.136a1 1 0 101.415 1.414L9.5 10.914l2.636 2.636a1 1 0 001.414-1.415L10.914 9.5l2.636-2.635a1 1 0 00-1.415-1.415L9.5 8.086 6.865 5.45z"
+                fill="#2CC9B6"
+              />
+            </svg>
+          </span>
+          <span class="switcher__label">Lower case</span>
         </label>
-        <label>
-          <input id="useLower"  name="lower" type="checkbox">
-          Use lower
+        <label class="switcher">
+          <input
+            class="switcher__checkbox"
+            id="useUpper"
+            name="upper"
+            type="checkbox"
+          />
+          <span class="switcher__tick switcher__tick--unchecked">
+            <svg
+              width="19"
+              height="19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M9.5 19a9.5 9.5 0 100-19 9.5 9.5 0 000 19zm4.812-11.256a1 1 0 10-1.414-1.414l-4.454 4.453-1.638-1.638a1 1 0 10-1.414 1.414l2.345 2.346a1 1 0 001.415 0l5.16-5.16z"
+                fill="#586066"
+              />
+            </svg>
+          </span>
+          <span class="switcher__tick switcher__tick--checked">
+            <svg
+              width="19"
+              height="19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M9.5 19a9.5 9.5 0 100-19 9.5 9.5 0 000 19zM6.865 5.45A1 1 0 005.45 6.865L8.086 9.5 5.45 12.136a1 1 0 101.415 1.414L9.5 10.914l2.636 2.636a1 1 0 001.414-1.415L10.914 9.5l2.636-2.635a1 1 0 00-1.415-1.415L9.5 8.086 6.865 5.45z"
+                fill="#2CC9B6"
+              />
+            </svg>
+          </span>
+          <span class="switcher__label">Upper case</span>
         </label>
-        <label>
-          <input id="useNumber" name="number" type="checkbox"  >
-          Use number
+        <label class="switcher">
+          <input
+            class="switcher__checkbox"
+            id="useNumber"
+            name="number"
+            type="checkbox"
+          />
+          <span class="switcher__tick switcher__tick--unchecked">
+            <svg
+              width="19"
+              height="19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M9.5 19a9.5 9.5 0 100-19 9.5 9.5 0 000 19zm4.812-11.256a1 1 0 10-1.414-1.414l-4.454 4.453-1.638-1.638a1 1 0 10-1.414 1.414l2.345 2.346a1 1 0 001.415 0l5.16-5.16z"
+                fill="#586066"
+              />
+            </svg>
+          </span>
+          <span class="switcher__tick switcher__tick--checked">
+            <svg
+              width="19"
+              height="19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M9.5 19a9.5 9.5 0 100-19 9.5 9.5 0 000 19zM6.865 5.45A1 1 0 005.45 6.865L8.086 9.5 5.45 12.136a1 1 0 101.415 1.414L9.5 10.914l2.636 2.636a1 1 0 001.414-1.415L10.914 9.5l2.636-2.635a1 1 0 00-1.415-1.415L9.5 8.086 6.865 5.45z"
+                fill="#2CC9B6"
+              />
+            </svg>
+          </span>
+          <span class="switcher__label">Number</span>
         </label>
-        <label>
-          <input id="useSpecial" name="special" type="checkbox">
-          Use special
+        <label class="switcher">
+          <input
+            class="switcher__checkbox"
+            id="useSpecial"
+            name="special"
+            type="checkbox"
+          />
+          <span class="switcher__tick switcher__tick--unchecked">
+            <svg
+              width="19"
+              height="19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M9.5 19a9.5 9.5 0 100-19 9.5 9.5 0 000 19zm4.812-11.256a1 1 0 10-1.414-1.414l-4.454 4.453-1.638-1.638a1 1 0 10-1.414 1.414l2.345 2.346a1 1 0 001.415 0l5.16-5.16z"
+                fill="#586066"
+              />
+            </svg>
+          </span>
+          <span class="switcher__tick switcher__tick--checked">
+            <svg
+              width="19"
+              height="19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M9.5 19a9.5 9.5 0 100-19 9.5 9.5 0 000 19zM6.865 5.45A1 1 0 005.45 6.865L8.086 9.5 5.45 12.136a1 1 0 101.415 1.414L9.5 10.914l2.636 2.636a1 1 0 001.414-1.415L10.914 9.5l2.636-2.635a1 1 0 00-1.415-1.415L9.5 8.086 6.865 5.45z"
+                fill="#2CC9B6"
+              />
+            </svg>
+          </span>
+          <span class="switcher__label">Symbol</span>
         </label>
       </div>
-      <p id="password" class="password">
-        <div class="password__row">
-          <span id="c-0"></span>
-          <span id="c-1"></span>
-          <span id="c-2"></span>
-          <span id="c-3"></span>
-          <span id="c-4"></span>
-          <span id="c-5"></span>
-          <span id="c-6"></span>
-          <span id="c-7"></span>
-        </div>
-        <div class="password__row">
-          <span id="c-8"></span>
-          <span id="c-9"></span>
-          <span id="c-10"></span>
-          <span id="c-11"></span>
-          <span id="c-12"></span>
-          <span id="c-13"></span>
-          <span id="c-14"></span>
-          <span id="c-15"></span>
-        </div>
-      </p>
+      <div>
+        <p id="password" class="password">
+          <span id="c-0" class="password__char"></span>
+          <span id="c-1" class="password__char"></span>
+          <span id="c-2" class="password__char"></span>
+          <span id="c-3" class="password__char"></span>
+          <span id="c-4" class="password__char"></span>
+          <span id="c-5" class="password__char"></span>
+          <span id="c-6" class="password__char"></span>
+          <span id="c-7" class="password__char"></span>
+          <span id="c-8" class="password__char"></span>
+          <span id="c-9" class="password__char"></span>
+          <span id="c-10" class="password__char"></span>
+          <span id="c-11" class="password__char"></span>
+          <span id="c-12" class="password__char"></span>
+          <span id="c-13" class="password__char"></span>
+          <span id="c-14" class="password__char"></span>
+          <span id="c-15" class="password__char"></span>
+        </p>
+      </div>
+      <button id="generate-password">Generate password</button>
     </main>
-    <button id="generate-password">Generate password</button>
   </body>
 </html>

@@ -1,3 +1,7 @@
-body {
-    background-color: lime !important;
+:root {
+    --outer-space: #313538;
+    --shark: #1D1E1F;
+    --shuttle-gray: #586066;
+    --turquoise: #2CC9B6;
+    --wood-smoke: #0F0F10;
 }

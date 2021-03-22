@@ -1,40 +1,60 @@
 import {
   generatePassword,
+  generateSeed,
   stopLetterSwap,
   updateASCIICharactersPool,
-} from "./core/index.js";
+} from './core/index.js';
 
 (() => {
-  const useLower = document.getElementById("useLower");
-  const useNumber = document.getElementById("useNumber");
-  const useSpecial = document.getElementById("useSpecial");
-  const useUpper = document.getElementById("useUpper");
+  const useLower = document.getElementById('useLower');
+  const useNumber = document.getElementById('useNumber');
+  const useSpecial = document.getElementById('useSpecial');
+  const useUpper = document.getElementById('useUpper');
 
   const passwordLength = 16;
-
-  // Set ASCII pool
-  updateASCIICharactersPool("upper", true);
 
   // Generate password
   const generatedPassword = generatePassword(passwordLength);
 
-  for (let i = 0; i < passwordLength; i++)
+  for (let i = 0; i < generatedPassword.length; i++)
     document.getElementById(`c-${i}`).textContent = generatedPassword[i];
 
-  document.getElementById("generate-password").addEventListener("click", () => {
-    stopLetterSwap();
-  });
-
-  // Update ASCII character pool
-  const updateASCIIOnChange = ({ target: { checked, name } }) => {
-    updateASCIICharactersPool(name, checked);
+  const toggleSwitcherState = ({ classList }) => {
+    classList.toggle('switcher--checked');
   };
 
-  useLower.addEventListener("change", updateASCIIOnChange);
+  // Set ASCII pool
+  updateASCIICharactersPool('lower', true);
+  // Set the selected option as checked
+  useLower.checked = true;
+  // Set styles for the selected pool
+  toggleSwitcherState(useLower.parentElement);
 
-  useNumber.addEventListener("change", updateASCIIOnChange);
+  const asciiSwitcherCallback = ({
+    target: { checked, name, parentElement },
+  }) => {
+    updateASCIICharactersPool(name, checked);
 
-  useSpecial.addEventListener("change", updateASCIIOnChange);
+    toggleSwitcherState(parentElement);
+  };
 
-  useUpper.addEventListener("change", updateASCIIOnChange);
+  useLower.addEventListener('change', asciiSwitcherCallback);
+
+  useNumber.addEventListener('change', asciiSwitcherCallback);
+
+  useSpecial.addEventListener('change', asciiSwitcherCallback);
+
+  useUpper.addEventListener('change', asciiSwitcherCallback);
+
+  document.getElementById('generate-password').addEventListener('click', () => {
+    stopLetterSwap();
+    const generatedPassword = generateSeed(passwordLength);
+    console.log(`generatedPassword:`);
+    console.log(generatedPassword);
+
+    for (let i = 0; i < generatedPassword.length; i++) {
+      document.getElementById(`c-${i}`).textContent = generatedPassword[i];
+      document.getElementById(`c-${i}`).classList.add('password__char--g');
+    }
+  });
 })();

@@ -1,8 +1,8 @@
-import ascii from "./characters.js";
+import ascii from './characters.js';
 import {
   generateASCIICharFromArray,
   generateLetterSwapTime,
-} from "../utils.js";
+} from '../utils.js';
 
 let asciiCharactersPool = [];
 const swapLetterTimeoutRef = [];
@@ -15,7 +15,7 @@ export const updateASCIICharactersPool = (key, value) => {
       (value) => !ascii[key].includes(value)
     );
   }
-  console.log("Updated ASCII pool", asciiCharactersPool);
+  console.log('Updated ASCII pool', asciiCharactersPool);
 };
 
 export const stopLetterSwap = () => {
@@ -45,6 +45,18 @@ export const generatePassword = (numberOfChar) => {
     );
 
     swapLetter(i);
+  }
+
+  return generatedPasswordChars;
+};
+
+export const generateSeed = (numberOfChar) => {
+  const generatedPasswordChars = [];
+
+  for (let i = 0; i < numberOfChar; i++) {
+    generatedPasswordChars.push(
+      generateASCIICharFromArray(asciiCharactersPool)
+    );
   }
 
   return generatedPasswordChars;
