@@ -1,18 +1,24 @@
 const path = require('path');
 
-// const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const webpack = require('webpack');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const mode =
   process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
 module.exports = {
   devServer: {
-    contentBase: './dist',
+    port: 3000,
   },
   devtool: 'source-map',
-  entry: ['./src/', './src/public/styles/index.css'],
+  entry: [
+    './src/index.js',
+    './src/public/styles/index.css',
+    './src/public/index.html',
+  ],
   mode,
   module: {
     rules: [
@@ -21,23 +27,60 @@ module.exports = {
         test: /\.js$/,
         use: {
           loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+            presets: ['@babel/preset-env'],
+          },
         },
       },
       {
         exclude: /node_modules/,
         test: /\.css$/,
         sideEffects: true,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'postcss-preset-env',
+                    {
+                      browsers: 'last 2 versions',
+                      stage: 0,
+                    },
+                  ],
+                ],
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
       },
     ],
   },
-  // optimization: {
-  //   minimize: true,
-  //   minimizer: [...minimizer, new CssMinimizerPlugin()],
-  // },
+  optimization: {
+    minimize: mode === 'production',
+    minimizer: [
+      new CssMinimizerPlugin(),
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true,
+          },
+        },
+        extractComments: true,
+      }),
+    ],
+  },
   output: {
     clean: true,
-    filename: '[name].[contenthash].bundle.js',
+    filename: mode === 'production' ? '[name].[contenthash].js' : '[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
   plugins: [
@@ -51,4 +94,5 @@ module.exports = {
         mode === 'production' ? '[name].[contenthash].css' : '[name].css',
     }),
   ],
+  target: 'web',
 };
