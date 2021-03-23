@@ -37,7 +37,7 @@ main {
 }
 
 .intro__call {
-    color: #7f8990;
+    color: #6E767C;
     font-family: 'Poppins', sans-serif;
     font-size: 20px;
     font-weight: 400;
@@ -68,9 +68,9 @@ main {
 
 .password__char {
     align-items: center;
-    background-color: var(--shark); /* #252729 */
+    background-color: #212224; /* #252729 */
     border-radius: 8px;
-    color: #32373B; /* 565759 */
+    color: #414549; /* 565759 */
     display: flex;
     height: 100%;
     font-family: 'Roboto Mono', monospace;
@@ -79,12 +79,13 @@ main {
     font-weight: 500;
     justify-content: center;
     text-align: center;
+    transition: background-color 350ms ease, color 350ms ease;
     width: 100%;
 }
 
 .password__char.password__char--g {
-    background-color: #353A3F;
-    color: #586169;
+    background-color: rgba(44, 201, 182, 0.1);
+    color: #218d80;
 }
 
 .switcher {
@@ -157,7 +158,33 @@ main {
     transform: translate(-20px, -50%);
 }
 
-#generate-password {
+.generate-password {
+    background-color: rgba(127, 137, 144, 0.35);
+    border: none;
+    border-radius: 8px;
+    color: #7F8990;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 64px;
+    outline: none;
+    padding: 16px 24px;
+    position: relative;
+    transition: opacity 450ms ease;
+}
+
+.generate-password:disabled {
+    cursor: not-allowed;
+    opacity: 0.25;
+}
+
+.generate-password--copy {
+    background-color: rgba(44, 201, 182, 0.2);
+    color: #2CC9B6;
+}
+
+/* #generate-password {
     background-color: transparent;
     border: 2px solid var(--turquoise);
     border-radius: 8px;
@@ -187,4 +214,4 @@ main {
 #generate-password:focus::before,
 #generate-password:hover::before {
     opacity: 1;
-}
+} */

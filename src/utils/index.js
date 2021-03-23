@@ -7,3 +7,6 @@ export const generateASCIICharFromArray = (asciiChars) =>
   );
 
 export const generateCharacterSwapTime = () => generateRandomNumber(450, 1100);
+
+export const generateRepeatPasswordGenerationTime = () =>
+  generateRandomNumber(1250, 2250);

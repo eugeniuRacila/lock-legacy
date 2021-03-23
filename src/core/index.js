@@ -8,6 +8,15 @@ let asciiCharactersPool = [];
 //
 const seedCharacterSwapTimeoutRef = [];
 
+export const clearSeedSwapTimeout = (fromIndex, toIndex) => {
+  if (
+    seedCharacterSwapTimeoutRef.length &&
+    seedCharacterSwapTimeoutRef.length >= toIndex
+  )
+    for (let i = fromIndex; i < toIndex; i++)
+      clearTimeout(seedCharacterSwapTimeoutRef[i]);
+};
+
 export const updateASCIICharactersPool = (key, value = true) => {
   // "value" is equal to true when the pool is requested to contain the range
   // of characters indicated in the "key" name
@@ -49,7 +58,7 @@ export const initSeedRandomizer = (numberOfCharacters) => {
   console.log('initSeedRandomizer ::', numberOfCharacters);
 };
 
-export const stopSeedRandomizer = () => {
+export const stopAndClearSeedRandomizer = () => {
   seedCharacterSwapTimeoutRef.map((timeout) => clearTimeout(timeout));
   console.log('stopSeedRandomizer ::', seedCharacterSwapTimeoutRef);
 };
