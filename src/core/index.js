@@ -8,7 +8,7 @@ let asciiCharactersPool = [];
 //
 const seedCharacterSwapTimeoutRef = [];
 
-export const updateASCIICharactersPool = (key, value) => {
+export const updateASCIICharactersPool = (key, value = true) => {
   // "value" is equal to true when the pool is requested to contain the range
   // of characters indicated in the "key" name
   if (value) {
