@@ -94,5 +94,11 @@ module.exports = {
         mode === 'production' ? '[name].[contenthash].css' : '[name].css',
     }),
   ],
+  resolve: {
+    alias: {
+      Core: path.resolve(__dirname, 'src/core/'),
+      Utils: path.resolve(__dirname, 'src/utils/'),
+    },
+  },
   target: 'web',
 };

@@ -1,9 +1,9 @@
 import {
   generatePassword,
-  generateSeed,
-  stopLetterSwap,
+  initSeedRandomizer,
+  stopSeedRandomizer,
   updateASCIICharactersPool,
-} from './core/index.js';
+} from 'Core';
 
 (() => {
   const useLower = document.getElementById('useLower');
@@ -18,6 +18,9 @@ import {
 
   for (let i = 0; i < generatedPassword.length; i++)
     document.getElementById(`c-${i}`).textContent = generatedPassword[i];
+
+  // Init seed randomizer
+  initSeedRandomizer(passwordLength);
 
   const toggleSwitcherState = ({ classList }) => {
     classList.toggle('switcher--checked');
@@ -47,14 +50,15 @@ import {
   useUpper.addEventListener('change', asciiSwitcherCallback);
 
   document.getElementById('generate-password').addEventListener('click', () => {
-    stopLetterSwap();
-    const generatedPassword = generateSeed(passwordLength);
-    console.log(`generatedPassword:`);
-    console.log(generatedPassword);
+    stopSeedRandomizer();
+    // stopLetterSwap();
+    // const generatedPassword = generateSeed(passwordLength);
+    // console.log(`generatedPassword:`);
+    // console.log(generatedPassword);
 
-    for (let i = 0; i < generatedPassword.length; i++) {
-      document.getElementById(`c-${i}`).textContent = generatedPassword[i];
-      document.getElementById(`c-${i}`).classList.add('password__char--g');
-    }
+    // for (let i = 0; i < generatedPassword.length; i++) {
+    //   document.getElementById(`c-${i}`).textContent = generatedPassword[i];
+    //   document.getElementById(`c-${i}`).classList.add('password__char--g');
+    // }
   });
 })();

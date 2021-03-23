@@ -1,13 +1,16 @@
-import ascii from './characters.js';
-import {
-  generateASCIICharFromArray,
-  generateLetterSwapTime,
-} from '../utils.js';
+import ascii from 'Core/characters';
+import { generateASCIICharFromArray, generateCharacterSwapTime } from 'Utils';
+import { updateCharacterNodeContent } from 'Utils/DomManipulation';
 
+// Current selected ASCII character's range for password generation
 let asciiCharactersPool = [];
-const swapLetterTimeoutRef = [];
+
+//
+const seedCharacterSwapTimeoutRef = [];
 
 export const updateASCIICharactersPool = (key, value) => {
+  // "value" is equal to true when the pool is requested to contain the range
+  // of characters indicated in the "key" name
   if (value) {
     asciiCharactersPool = [...asciiCharactersPool, ...ascii[key]];
   } else {
@@ -15,49 +18,38 @@ export const updateASCIICharactersPool = (key, value) => {
       (value) => !ascii[key].includes(value)
     );
   }
-  console.log('Updated ASCII pool', asciiCharactersPool);
+
+  console.log('updateASCIICharactersPool ::', asciiCharactersPool);
 };
 
-export const stopLetterSwap = () => {
-  swapLetterTimeoutRef.map((timeout) => clearTimeout(timeout));
+export const generatePassword = (numberOfCharacters) => {
+  const generatedPassword = [];
+
+  for (let i = 0; i < numberOfCharacters; i++)
+    generatedPassword.push(generateASCIICharFromArray(asciiCharactersPool));
+
+  console.log('generatePassword ::', generatedPassword);
+
+  return generatedPassword;
 };
 
-const updateLetterContent = (i) => {
-  document.getElementById(`c-${i}`).textContent = generateASCIICharFromArray(
-    asciiCharactersPool
-  );
-};
-
-const swapLetter = (i) => {
-  swapLetterTimeoutRef[i] = setTimeout(() => {
-    updateLetterContent(i);
-
-    swapLetter(i);
-  }, generateLetterSwapTime());
-};
-
-export const generatePassword = (numberOfChar) => {
-  const generatedPasswordChars = [];
-
-  for (let i = 0; i < numberOfChar; i++) {
-    generatedPasswordChars.push(
+const swapSeedCharacter = (i) => {
+  seedCharacterSwapTimeoutRef[i] = setTimeout(() => {
+    updateCharacterNodeContent(
+      i,
       generateASCIICharFromArray(asciiCharactersPool)
     );
 
-    swapLetter(i);
-  }
-
-  return generatedPasswordChars;
+    swapSeedCharacter(i);
+  }, generateCharacterSwapTime());
 };
 
-export const generateSeed = (numberOfChar) => {
-  const generatedPasswordChars = [];
+export const initSeedRandomizer = (numberOfCharacters) => {
+  for (let i = 0; i < numberOfCharacters; i++) swapSeedCharacter(i);
+  console.log('initSeedRandomizer ::', numberOfCharacters);
+};
 
-  for (let i = 0; i < numberOfChar; i++) {
-    generatedPasswordChars.push(
-      generateASCIICharFromArray(asciiCharactersPool)
-    );
-  }
-
-  return generatedPasswordChars;
+export const stopSeedRandomizer = () => {
+  seedCharacterSwapTimeoutRef.map((timeout) => clearTimeout(timeout));
+  console.log('stopSeedRandomizer ::', seedCharacterSwapTimeoutRef);
 };
