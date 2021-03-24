@@ -52,6 +52,10 @@ main {
     margin-bottom: 64px;
 }
 
+.password-container {
+    margin-bottom: 64px;
+}
+
 .password {
     display: inline-grid;
     gap: 12px;
@@ -158,60 +162,53 @@ main {
     transform: translate(-20px, -50%);
 }
 
+.action-buttons {
+    margin: 0 auto;
+    position: relative;
+    width: fit-content;
+}
+
 .generate-password {
-    background-color: rgba(127, 137, 144, 0.35);
+    background-color: #363B41;
     border: none;
-    border-radius: 8px;
+    border-radius: 28px;
     color: #7F8990;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     font-size: 18px;
     font-weight: 500;
-    margin-top: 64px;
+    height: 56px;
     outline: none;
-    padding: 16px 24px;
+    padding: 0 32px;
     position: relative;
     transition: opacity 450ms ease;
 }
 
-.generate-password:disabled {
+.generate-password:disabled,
+.repeat-password-generation:disabled {
     cursor: not-allowed;
     opacity: 0.25;
 }
 
-.generate-password--copy {
+.generate-password--clipboard {
     background-color: rgba(44, 201, 182, 0.2);
     color: #2CC9B6;
+    padding: 0 72px 0 32px;
 }
 
-/* #generate-password {
+.generate-password--clipboard + .repeat-password-generation {
+    display: inline-flex;
+}
+
+.repeat-password-generation {
     background-color: transparent;
-    border: 2px solid var(--turquoise);
-    border-radius: 8px;
-    color: var(--turquoise);
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-    margin-top: 64px;
-    padding: 16px 24px;
-    position: relative;
-}
-
-#generate-password::before {
-    background-color: rgba(44, 201, 182, 0.17);
-    bottom: 0;
-    content: '';
-    left: 0;
-    opacity: 0;
+    border: none;
+    cursor: copy;
+    display: none;
+    outline: none;
     position: absolute;
-    right: 0;
-    top: 0;
-    transition: opacity 250ms ease;
-    user-select: none;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: opacity 450ms ease;
 }
-
-#generate-password:focus::before,
-#generate-password:hover::before {
-    opacity: 1;
-} */

@@ -8,8 +8,9 @@ import {
 import { generateRepeatPasswordGenerationTime } from 'Utils';
 import { updateCharacterNodeContent } from 'Utils/DomManipulation';
 
-let generatedPassword;
 const passwordLength = 16;
+let isCopyToClipboard = false;
+let generatedPassword;
 
 // Switcher elements
 const generatePasswordButton = document.getElementById('generate-password');
@@ -21,15 +22,6 @@ const password = document.getElementById('password');
 const repeatPasswordGenerationButton = document.getElementById(
   'repeat-password-generation'
 );
-
-const populatePasswordsCharacters = (arrayOfCharacters) => {
-  for (let i = 0; i < arrayOfCharacters.length; i++)
-    updateCharacterNodeContent(i, arrayOfCharacters[i]);
-};
-
-const generateInitialPassword = () => {
-  populatePasswordsCharacters(generatePassword(passwordLength));
-};
 
 const getLocalStorageValue = (key) => localStorage.getItem(key);
 
@@ -71,7 +63,22 @@ const setGeneratedPasswordCharacters = (fromIndex, toIndex) => {
   }
 };
 
-const clearCharSwapTimeoutAndSetStyles = () => {
+const removeGeneratedPasswordStyle = () => {
+  for (let i = 0; i < passwordLength; i++)
+    document.getElementById(`c-${i}`).classList.remove('password__char--g');
+};
+
+const changeGegeneratePasswordButtonToCopyClipboard = (isDisabled = false) => {
+  generatePasswordButton.disabled = isDisabled;
+
+  if (!isCopyToClipboard) {
+    isCopyToClipboard = true;
+    generatePasswordButton.classList.add('generate-password--clipboard');
+    generatePasswordButton.textContent = 'Copy password to clipboard';
+  }
+};
+
+const setGeneratedPasswordWithStyles = () => {
   for (
     let i = 0, j = 4, time = 0;
     j <= passwordLength;
@@ -82,9 +89,8 @@ const clearCharSwapTimeoutAndSetStyles = () => {
       setGeneratedPasswordCharacters(i, j);
 
       if (j === passwordLength) {
-        generatePasswordButton.disabled = false;
-        generatePasswordButton.classList.add('generate-password--copy');
-        generatePasswordButton.textContent = 'Copy password to clipboard';
+        repeatPasswordGenerationButton.disabled = false;
+        changeGegeneratePasswordButtonToCopyClipboard();
       }
     }, time);
 };
@@ -93,10 +99,30 @@ const onGeneratePasswordClick = () => {
   generatePasswordButton.disabled = true;
   generatedPassword = generatePassword(passwordLength);
 
-  clearCharSwapTimeoutAndSetStyles();
+  setGeneratedPasswordWithStyles();
 
-  generatePasswordButton.removeEventListener('click', onGeneratePasswordClick);
-  generatePasswordButton.addEventListener('click', onCopyToClipboardClick);
+  if (!isCopyToClipboard) {
+    generatePasswordButton.removeEventListener(
+      'click',
+      onGeneratePasswordClick
+    );
+    generatePasswordButton.addEventListener('click', onCopyToClipboardClick);
+  }
+};
+
+const onRepeatGeneratePasswordClick = () => {
+  repeatPasswordGenerationButton.disabled = true;
+  generatePasswordButton.disabled = true;
+
+  generatedPassword = generatePassword(passwordLength);
+  stopAndClearSeedRandomizer();
+  initSeedRandomizer(passwordLength);
+
+  removeGeneratedPasswordStyle();
+
+  setTimeout(() => {
+    onGeneratePasswordClick();
+  }, generateRepeatPasswordGenerationTime());
 };
 
 const onCopyToClipboardClick = () => {
@@ -118,17 +144,8 @@ export const initApp = () => {
 
   generatePasswordButton.addEventListener('click', onGeneratePasswordClick);
 
-  repeatPasswordGenerationButton.addEventListener('click', () => {
-    generatePasswordButton.disabled = true;
-    stopAndClearSeedRandomizer();
-    generatedPassword = generatePassword(passwordLength);
-    initSeedRandomizer(passwordLength);
-
-    for (let i = 0; i < passwordLength; i++)
-      document.getElementById(`c-${i}`).classList.remove('password__char--g');
-
-    setTimeout(() => {
-      onGeneratePasswordClick();
-    }, generateRepeatPasswordGenerationTime());
-  });
+  repeatPasswordGenerationButton.addEventListener(
+    'click',
+    onRepeatGeneratePasswordClick
+  );
 };
