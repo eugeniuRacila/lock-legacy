@@ -18,6 +18,7 @@ module.exports = {
     './src/index.js',
     './src/public/styles/index.css',
     './src/public/index.html',
+    './src/public/images/open_graph.png',
   ],
   mode,
   module: {
@@ -62,6 +63,22 @@ module.exports = {
         test: /\.html$/i,
         loader: 'html-loader',
       },
+      // {
+      //   test: /\.(png|jpe?g|gif)$/i,
+      //   use: [
+      //     {
+      //       loader: 'file-loader',
+      //       options: {
+      //         name: '[name]_[contenthash].[ext]',
+      //         outputPath: 'assets',
+      //       },
+      //     },
+      //   ],
+      // },
+      {
+        test: /\.png/,
+        type: 'asset/resource',
+      },
     ],
   },
   optimization: {
@@ -79,6 +96,7 @@ module.exports = {
     ],
   },
   output: {
+    assetModuleFilename: 'assets/[name]_[contenthash][ext]',
     clean: true,
     filename: mode === 'production' ? '[name].[contenthash].js' : '[name].js',
     path: path.resolve(__dirname, 'dist'),
