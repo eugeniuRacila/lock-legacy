@@ -2,6 +2,7 @@ const path = require('path');
 
 const webpack = require('webpack');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -63,18 +64,6 @@ module.exports = {
         test: /\.html$/i,
         loader: 'html-loader',
       },
-      // {
-      //   test: /\.(png|jpe?g|gif)$/i,
-      //   use: [
-      //     {
-      //       loader: 'file-loader',
-      //       options: {
-      //         name: '[name]_[contenthash].[ext]',
-      //         outputPath: 'assets',
-      //       },
-      //     },
-      //   ],
-      // },
       {
         test: /\.png/,
         type: 'asset/resource',
@@ -102,6 +91,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   plugins: [
+    new ESLintPlugin(options),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: 'body',

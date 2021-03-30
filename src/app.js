@@ -6,7 +6,6 @@ import {
   updateASCIICharactersPool,
 } from 'Core';
 import { generateRepeatPasswordGenerationTime } from 'Utils';
-import { updateCharacterNodeContent } from 'Utils/DomManipulation';
 
 const passwordLength = 16;
 let isCopyToClipboard = false;
